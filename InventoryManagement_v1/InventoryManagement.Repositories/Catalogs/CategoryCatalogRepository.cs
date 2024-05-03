@@ -1,0 +1,47 @@
+﻿using InventoryManagement.Adstractions.Repositories;
+using InventoryManagement.Entities.ArticlesInventory.Catalogs;
+using InventoryManagement.Repositories.DataContext;
+using Microsoft.EntityFrameworkCore;
+
+namespace InventoryManagement.Repositories.Catalogs
+{
+    internal class CategoryCatalogRepository : ISpecificCatalogRepository<CategoryCatalog>
+    {
+        private readonly InventoryManagementContext _context;
+        private readonly DbSet<CategoryCatalog> _entity;
+        public CategoryCatalogRepository(InventoryManagementContext context)
+        {
+            _context = context;
+            _entity = _context.Set<CategoryCatalog>();
+        }
+
+
+        #region Exist method with name param
+        /// <summary>
+        /// This method verify if exist one category catalog record that match with name param value.
+        /// </summary>
+        /// <param name="name">Appertain category catalog name value.</param>
+        /// <returns>True o false value.</returns>
+        public async Task<bool> ExistsAsync(string name)
+        {
+            return await _entity.Where(c => c.CategoryName!.Trim() == name.Trim()).AnyAsync();
+        }
+        #endregion
+
+        #region GetItem with id,code,name params
+        /// <summary>
+        /// This method get the first record that match with id, code and name from category catalog.
+        /// </summary>
+        /// <param name="id">Appertain category catalog identifier value.</param>
+        /// <param name="code">Appertain category catalog code value.</param>
+        /// <param name="name">Appertain category catalog name value.</param>
+        /// <returns>Category catalog record or null value.</returns>
+        public async Task<CategoryCatalog> GetItemAsync(int id, Guid code, string name)
+        {
+            var response = await _entity.Where(c => c.ControlCode == code &&
+            c.CategoryName == name && c.ItemId == id).FirstOrDefaultAsync();
+            return response!;
+        }
+        #endregion
+    }
+}
