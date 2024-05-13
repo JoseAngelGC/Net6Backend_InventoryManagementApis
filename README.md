@@ -1,6 +1,6 @@
 ## Inventory Management Apis💻
 
-The purpose of the Inventory Management APIs project is the backend implementation of APIs related to a inventory management system for small stores or warehouses.
+The purpose of this backend project is the develoment and implementation of APIs, which is related to a inventory management system for small stores or warehouses.
 
 This backend is structured following SOLID principles and suggestions described by [Robert C. Martin](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) about Clean Architecture for the development of modular, scalable and maintainable software. Finally, this backend was developed with [Net 6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0), c#, libraries and Microsoft technology.
 
